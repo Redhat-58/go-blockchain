@@ -18,6 +18,7 @@ type Block struct {
 	Index        int
 	Timestamp    time.Time
 	Data         string
-	PreviousHash []byte
-	Hash         []byte
+	PreviousHash string
+	Hash         string
+	Nonce        int
 }

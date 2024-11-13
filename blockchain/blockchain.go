@@ -7,7 +7,7 @@ func NewBlockChain() *BlockChain {
 }
 
 func createGenesisBlock() *Block {
-	return NewBlock(0, "Initial Block", []byte{})
+	return NewBlock(0, "GenesisBlock", "")
 }
 
 func (bc *BlockChain) GetLastBlock() *Block {
@@ -17,6 +17,7 @@ func (bc *BlockChain) GetLastBlock() *Block {
 func (bc *BlockChain) AddBlock(data string) {
 	lastBlock := bc.GetLastBlock()
 	newBlock := NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
+	newBlock.ProofOfWork()
 	bc.Blocks = append(bc.Blocks, newBlock)
 
 }

@@ -1,32 +1,30 @@
 package blockchain
 
 import (
-	"bytes"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"time"
 )
 
-func NewBlock(index int, data string, previousHash []byte) *Block {
+func NewBlock(index int, data string, previousHash string) *Block {
 	block := &Block{
 		Index:        index,
 		Data:         data,
 		PreviousHash: previousHash,
 		Timestamp:    time.Now(),
-		Hash:         []byte{},
+		Hash:         "",
+		Nonce:        0,
 	}
-	block.Hash = block.calculateHash()
+
+	fmt.Println("Mining new block...")
+	block.ProofOfWork()
 	return block
 }
 
-func (b *Block) calculateHash() []byte {
-	data := bytes.Join([][]byte{
-		[]byte(fmt.Sprintf("%d", b.Index)),
-		b.PreviousHash,
-		[]byte(b.Timestamp.String()),
-		[]byte(b.Data),
-	}, []byte{})
+func (b *Block) calculateHash() string {
+	data := fmt.Sprintf("%d%s%d%s%d", b.Index, b.PreviousHash, b.Nonce, b.Timestamp)
+	hash := sha256.Sum256([]byte(data))
 
-	hash := sha256.Sum256(data)
-	return hash[:]
+	return hex.EncodeToString(hash[:])
 }
