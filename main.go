@@ -9,6 +9,9 @@ func main() {
 
 	bc := blockchain.NewBlockChain()
 
+	token := blockchain.NewToken("MyToken", "MTK", 1000)
+	fmt.Println("Token created", token.Name, token.Symbol, token.Balance, token.TotalSupply)
+
 	bc.AddBlock("Block 1: Jalal just enterd a tansaction")
 
 	for _, block := range bc.Blocks {

@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+type Token struct {
+	Name        string
+	Symbol      string
+	TotalSupply float64
+	Balance     map[string]float64
+}
+
 type BlockChain struct {
 	Blocks []*Block
 }
@@ -21,4 +28,5 @@ type Block struct {
 	PreviousHash string
 	Hash         string
 	Nonce        int
+	Token        *Token
 }
