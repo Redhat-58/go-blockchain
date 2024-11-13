@@ -36,3 +36,5 @@ func (t *Token) Transfer(from string, to string, amount float64) error {
 
 	return nil
 }
+
+func MintToken()
