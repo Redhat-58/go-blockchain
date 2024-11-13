@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const targetBits = 6
+const targetBits = 2
 
 func (b *Block) ProofOfWork() {
 	targetBits := strings.Repeat("0", targetBits)

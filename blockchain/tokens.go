@@ -3,7 +3,10 @@ package blockchain
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
+
+const mintTargetBits = 3
 
 func NewToken(name string, symbol string, totalSupply float64) *Token {
 	balances := make(map[string]float64)
@@ -37,4 +40,15 @@ func (t *Token) Transfer(from string, to string, amount float64) error {
 	return nil
 }
 
-func MintToken()
+func (b *Block) MintToken(t *Token) {
+	targetBits := strings.Repeat("0", mintTargetBits)
+	for {
+		hash := b.calculateHash()
+		if strings.HasPrefix(hash, targetBits) {
+			t.Balance[b.Hash]++
+			fmt.Printf("Token mined! Nonce: %d, Hash: %s\n", b.Nonce, b.Hash)
+			break
+		}
+		b.Nonce++
+	}
+}

@@ -13,8 +13,8 @@ func NewBlock(index int, data string, previousHash string) *Block {
 		Data:         data,
 		PreviousHash: previousHash,
 		Timestamp:    time.Now(),
-		Hash:         "",
 		Nonce:        0,
+		Token:        0,
 	}
 
 	fmt.Println("Mining new block...")

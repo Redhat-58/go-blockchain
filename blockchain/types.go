@@ -20,6 +20,7 @@ type Token struct {
 
 type BlockChain struct {
 	Blocks []*Block
+	Token  Token
 }
 
 type ProofOfWork struct {
@@ -34,6 +35,6 @@ type Block struct {
 	PreviousHash string
 	Hash         string
 	Nonce        int
-	Token        *Token
+	Token        float64
 	Transaction  []*Transaction
 }
