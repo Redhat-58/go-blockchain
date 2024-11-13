@@ -1,12 +1,12 @@
-package main
+package blockchain
 
 type BlockChain struct {
-	blocks []*Block
+	Blocks []*Block
 }
 
 func NewBlockChain() *BlockChain {
 	return &BlockChain{
-		blocks: []*Block{createGenesisBlock()},
+		Blocks: []*Block{createGenesisBlock()},
 	}
 }
 
@@ -15,12 +15,12 @@ func createGenesisBlock() *Block {
 }
 
 func (bc *BlockChain) GetLastBlock() *Block {
-	return bc.blocks[len(bc.blocks)-1]
+	return bc.Blocks[len(bc.Blocks)-1]
 }
 
 func (bc *BlockChain) AddBlock(data string) {
 	lastBlock := bc.GetLastBlock()
 	newBlock := NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
-	bc.blocks = append(bc.blocks, newBlock)
+	bc.Blocks = append(bc.Blocks, newBlock)
 
 }

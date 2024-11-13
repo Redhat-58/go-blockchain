@@ -2,15 +2,17 @@ package main
 
 import (
 	"fmt"
+	"go-blockchain/blockchain"
 )
 
 func main() {
 
-	bc := NewBlockChain()
+	// bc := NewBlockChain()
+	bc := blockchain.NewBlockChain()
 
 	bc.AddBlock("Block 1: Jalal just created the blockchain")
 
-	for _, block := range bc.blocks {
+	for _, block := range bc.Blocks {
 
 		fmt.Println("Index", block.Index)
 		fmt.Println("Timestamp", block.Timestamp)
