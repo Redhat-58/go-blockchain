@@ -5,6 +5,12 @@ import (
 	"time"
 )
 
+type Transaction struct {
+	ID     []byte
+	Input  []byte
+	Output []byte
+}
+
 type Token struct {
 	Name        string
 	Symbol      string
@@ -29,4 +35,5 @@ type Block struct {
 	Hash         string
 	Nonce        int
 	Token        *Token
+	Transaction  []*Transaction
 }

@@ -33,5 +33,6 @@ func (t *Token) Transfer(from string, to string, amount float64) error {
 	t.Balance[from] -= amount
 	t.Balance[to] += amount
 	fmt.Println("Transferred %.2f %s from %s to %s\n", amount, t.Symbol, from, to)
+
 	return nil
 }
