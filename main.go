@@ -9,7 +9,7 @@ func main() {
 
 	bc := blockchain.NewBlockChain()
 
-	bc.AddBlock("Block 1: Jalal just created the blockchain")
+	bc.AddBlock("Block 1: Jalal just enterd a tansaction")
 
 	for _, block := range bc.Blocks {
 
