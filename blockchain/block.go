@@ -7,14 +7,6 @@ import (
 	"time"
 )
 
-type Block struct {
-	Index        int
-	Timestamp    time.Time
-	Data         string
-	PreviousHash []byte
-	Hash         []byte
-}
-
 func NewBlock(index int, data string, previousHash []byte) *Block {
 	block := &Block{
 		Index:        index,

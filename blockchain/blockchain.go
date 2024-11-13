@@ -1,9 +1,5 @@
 package blockchain
 
-type BlockChain struct {
-	Blocks []*Block
-}
-
 func NewBlockChain() *BlockChain {
 	return &BlockChain{
 		Blocks: []*Block{createGenesisBlock()},

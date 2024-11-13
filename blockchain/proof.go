@@ -6,11 +6,6 @@ import (
 	"math/big"
 )
 
-type ProofOfWork struct {
-	Block  *Block
-	Target *big.Int
-}
-
 const targetBits = 16
 
 func NewProofOfWork(block *Block) *ProofOfWork {
