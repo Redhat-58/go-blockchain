@@ -46,6 +46,9 @@ func (b *Block) MintToken(t *Token) {
 		hash := b.calculateHash()
 		if strings.HasPrefix(hash, targetBits) {
 			t.Balance[b.Hash]++
+			t.TotalSupply++
+			b.Token++
+
 			fmt.Printf("Token mined! Nonce: %d, Hash: %s\n", b.Nonce, b.Hash)
 			break
 		}
