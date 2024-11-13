@@ -1,27 +1,12 @@
 package blockchain
 
-import (
-	"bytes"
-	"crypto/sha256"
-)
-
-func (bc *Block) NewTransaction(input, output string) *Transaction {
+func (bc *BlockChain) NewTransaction(to, from string, value float64) {
 	tx := &Transaction{
-		ID:     []byte{},
-		Input:  []byte(input),
-		Output: []byte(output),
+		To:    to,
+		From:  from,
+		Value: value,
 	}
-	tx.ID = tx.calculateHash()
-	bc.Transaction = append(bc.Transaction, tx)
-	return tx
+	tx.ID = len(bc.Transactions) + 1
+	bc.Transactions = append(bc.Transactions, tx)
 
-}
-
-func (tx *Transaction) calculateHash() []byte {
-	data := bytes.Join([][]byte{
-		tx.Input,
-		tx.Output,
-	}, []byte{})
-	hash := sha256.Sum256(data)
-	return hash[:]
 }

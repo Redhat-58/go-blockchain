@@ -6,9 +6,10 @@ import (
 )
 
 type Transaction struct {
-	ID     []byte
-	Input  []byte
-	Output []byte
+	ID    int
+	To    string
+	From  string
+	Value float64
 }
 
 type Token struct {
@@ -19,8 +20,9 @@ type Token struct {
 }
 
 type BlockChain struct {
-	Blocks []*Block
-	Token  Token
+	Blocks       []*Block
+	Token        Token
+	Transactions []*Transaction
 }
 
 type ProofOfWork struct {

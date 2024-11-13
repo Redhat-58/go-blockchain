@@ -40,7 +40,7 @@ func (t *Token) Transfer(from string, to string, amount float64) error {
 	return nil
 }
 
-func (b *Block) MintToken(t *Token) {
+func (b *Block) MintToken(t *Token, bc *BlockChain) {
 	targetBits := strings.Repeat("0", mintTargetBits)
 	for {
 		hash := b.calculateHash()
@@ -48,7 +48,7 @@ func (b *Block) MintToken(t *Token) {
 			t.Balance[b.Hash]++
 			t.TotalSupply++
 			b.Token++
-
+			bc.NewTransaction("", b.Hash, 1)
 			fmt.Printf("Token mined! Nonce: %d, Hash: %s\n", b.Nonce, b.Hash)
 			break
 		}
