@@ -1,9 +1,16 @@
 package blockchain
 
 import (
+	"crypto/ecdsa"
 	"math/big"
 	"time"
 )
+
+type Wallet struct {
+	PrivateKey *ecdsa.PrivateKey
+	PublicKey  []byte
+	Value      float64
+}
 
 type Transaction struct {
 	ID    int
@@ -23,6 +30,7 @@ type BlockChain struct {
 	Blocks       []*Block
 	Token        Token
 	Transactions []*Transaction
+	Wallets      map[string]*Wallet
 }
 
 type ProofOfWork struct {
@@ -37,6 +45,5 @@ type Block struct {
 	PreviousHash string
 	Hash         string
 	Nonce        int
-	Token        float64
 	Transaction  []*Transaction
 }

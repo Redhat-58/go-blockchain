@@ -47,7 +47,7 @@ func (b *Block) MintToken(t *Token, bc *BlockChain) {
 		if strings.HasPrefix(hash, targetBits) {
 			t.Balance[b.Hash]++
 			t.TotalSupply++
-			b.Token++
+			bc.FundWallet(b, 1)
 			bc.NewTransaction("", b.Hash, 1)
 			fmt.Printf("Token mined! Nonce: %d, Hash: %s\n", b.Nonce, b.Hash)
 			break

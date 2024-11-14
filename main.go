@@ -19,7 +19,7 @@ func main() {
 		fmt.Println("Data: ", block.Data)
 		fmt.Println("PrvHash: ", block.PreviousHash)
 		fmt.Println("Hash: ", block.Hash)
-		fmt.Println("Token: ", block.Token)
+		fmt.Println("Token: ", bc.Wallets[block.Hash].Value)
 		fmt.Println()
 	}
 	fmt.Println()

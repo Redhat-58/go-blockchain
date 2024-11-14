@@ -2,8 +2,9 @@ package blockchain
 
 func NewBlockChain() *BlockChain {
 	return &BlockChain{
-		Blocks: []*Block{createGenesisBlock()},
-		Token:  *createGenesisToken(),
+		Blocks:  []*Block{createGenesisBlock()},
+		Token:   *createGenesisToken(),
+		Wallets: make(map[string]*Wallet),
 	}
 }
 
@@ -23,6 +24,7 @@ func (bc *BlockChain) AddBlock(data string) *Block {
 	lastBlock := bc.GetLastBlock()
 	newBlock := NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
 	bc.Blocks = append(bc.Blocks, newBlock)
+	bc.NewWallet(newBlock)
 	return newBlock
 
 }
