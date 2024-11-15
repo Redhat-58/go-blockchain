@@ -1,19 +1,21 @@
 package blockchain
 
+import "fmt"
+
 func NewBlockChain() *BlockChain {
 	return &BlockChain{
-		Blocks:  []*Block{createGenesisBlock()},
 		Token:   *createGenesisToken(),
-		Wallets: make(map[string]*Wallet),
+		Wallets: createWallets(),
 	}
-}
-
-func createGenesisBlock() *Block {
-	return NewBlock(0, "GenesisBlock", "")
 }
 
 func createGenesisToken() *Token {
 	return NewToken("Token", "GTK", 0)
+}
+
+func createWallets() map[string]*Wallet {
+	fmt.Println("Creating wallets")
+	return make(map[string]*Wallet)
 }
 
 func (bc *BlockChain) GetLastBlock() *Block {
@@ -22,9 +24,8 @@ func (bc *BlockChain) GetLastBlock() *Block {
 
 func (bc *BlockChain) AddBlock(data string) *Block {
 	lastBlock := bc.GetLastBlock()
-	newBlock := NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
+	newBlock := bc.NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
 	bc.Blocks = append(bc.Blocks, newBlock)
-	bc.NewWallet(newBlock)
 	return newBlock
 
 }

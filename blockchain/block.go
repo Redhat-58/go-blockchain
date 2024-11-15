@@ -7,7 +7,12 @@ import (
 	"time"
 )
 
-func NewBlock(index int, data string, previousHash string) *Block {
+func (bc *BlockChain) CreateGenesisBlock() *Block {
+	fmt.Println("Created genesis block")
+	return bc.NewBlock(0, "GenesisBlock", "")
+}
+
+func (bc *BlockChain) NewBlock(index int, data string, previousHash string) *Block {
 	block := &Block{
 		Index:        index,
 		Data:         data,
@@ -24,6 +29,5 @@ func NewBlock(index int, data string, previousHash string) *Block {
 func (b *Block) calculateHash() string {
 	data := fmt.Sprintf("%d%s%d%s%d", b.Index, b.PreviousHash, b.Nonce, b.Timestamp)
 	hash := sha256.Sum256([]byte(data))
-
 	return hex.EncodeToString(hash[:])
 }
