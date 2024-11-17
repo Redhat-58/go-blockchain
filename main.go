@@ -9,9 +9,9 @@ func main() {
 
 	bc := blockchain.NewBlockChain()
 
-	bc.AddBlock("Block 1: Jalals Block")
+	myBlock := bc.AddBlock("Block 1: Jalals Block")
 	bc.AddBlock("Block 2: Johns Block")
-	// myBlock.MintToken(&bc.Token, bc)
+	myBlock.MintToken(&bc.Token, bc)
 
 	for _, block := range bc.Blocks {
 

@@ -34,6 +34,7 @@ func (bc *BlockChain) NewBlock(index int, data string, previousHash string) *Blo
 	fmt.Println("Mining new block...")
 	block.ProofOfWork()
 	bc.Blocks = append(bc.Blocks, block)
+	block.NewWallet(bc)
 	return block
 }
 
