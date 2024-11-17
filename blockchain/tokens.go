@@ -48,8 +48,7 @@ func (b *Block) MintToken(t *Token, bc *BlockChain) {
 			t.Balance[b.Hash]++
 			t.TotalSupply++
 			bc.FundWallet(b, 1)
-			bc.NewTransaction("", b.Hash, 1)
-			fmt.Printf("Token mined! Nonce: %d, Hash: %s\n", b.Nonce, b.Hash)
+			bc.NewTransaction(b.Hash, "Mint", 1)
 			break
 		}
 		b.Nonce++
