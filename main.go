@@ -17,7 +17,7 @@ func main() {
 	myBlock.MintToken(&bc.Token, bc)
 	myBlock.MintToken(&bc.Token, bc)
 
-	bc.Token.Transfer(myBlock.Hash, johnBlock.Hash, 0.5)
+	bc.Token.Transfer(bc, myBlock.Hash, johnBlock.Hash, 0.5)
 
 	fmt.Println(bc.Token)
 	fmt.Println(bc.Transactions)

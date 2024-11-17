@@ -43,3 +43,12 @@ func (b *Block) calculateHash() string {
 	hash := sha256.Sum256([]byte(data))
 	return hex.EncodeToString(hash[:])
 }
+
+func (bc *BlockChain) GetBlockByHash(hash string) (*Block, error) {
+	for _, block := range bc.Blocks {
+		if block.Hash == hash {
+			return block, nil
+		}
+	}
+	return nil, fmt.Errorf("block not found for hash: %s", hash)
+}

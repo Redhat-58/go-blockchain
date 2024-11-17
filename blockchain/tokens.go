@@ -11,12 +11,14 @@ const mintTargetBits = 3
 func NewToken(name string, symbol string, totalSupply float64) *Token {
 	balances := make(map[string]float64)
 	balances["creator"] = totalSupply
-	return &Token{
+	newToken := &Token{
 		Name:        name,
-		Symbol:      "",
+		Symbol:      symbol,
 		TotalSupply: totalSupply,
 		Balance:     balances,
 	}
+	SaveToken(newToken)
+	return newToken
 }
 
 func (t *Token) GetBalance(account string) float64 {
@@ -26,7 +28,7 @@ func (t *Token) GetBalance(account string) float64 {
 	return 0
 }
 
-func (t *Token) Transfer(from string, to string, amount float64) error {
+func (t *Token) Transfer(bc *BlockChain, from string, to string, amount float64) error {
 	if amount <= 0 {
 		return errors.New("Amount must be greater than zero: 0")
 	}
@@ -35,6 +37,18 @@ func (t *Token) Transfer(from string, to string, amount float64) error {
 	}
 	t.Balance[from] -= amount
 	t.Balance[to] += amount
+
+	fromBlock, err := bc.GetBlockByHash(from)
+	if err != nil {
+		fmt.Println("Error retreving block")
+	}
+	toBlock, err := bc.GetBlockByHash(from)
+	if err != nil {
+		fmt.Println("Error retreving block")
+	}
+
+	UpdateBalance(fromBlock, t)
+	UpdateBalance(toBlock, t)
 
 	fmt.Println("Transferred %.2f %s from %s to %s\n", amount, t.Symbol, from, to)
 
