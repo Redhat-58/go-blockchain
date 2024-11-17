@@ -7,6 +7,8 @@ A simple blockchain implemented in golang
 2. Blocks
 2. Tokens
 3. Transactions
+4. Wallets
+5. Persistent storage
 
 
 # Contribution Guide
