@@ -1,6 +1,8 @@
 package blockchain
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func NewBlockChain() *BlockChain {
 	return &BlockChain{
@@ -26,6 +28,7 @@ func (bc *BlockChain) GetLastBlock() *Block {
 func (bc *BlockChain) AddBlock(data string) *Block {
 	lastBlock := bc.GetLastBlock()
 	newBlock := bc.NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
+	SaveBlock(newBlock)
 	return newBlock
 
 }

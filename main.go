@@ -7,6 +7,8 @@ import (
 
 func main() {
 
+	blockchain.InitDB()
+
 	bc := blockchain.NewBlockChain()
 
 	myBlock := bc.AddBlock("Block 1: Jalals Block")
