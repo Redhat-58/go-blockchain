@@ -8,5 +8,6 @@ func (bc *BlockChain) NewTransaction(to, from string, value float64) {
 	}
 	tx.ID = len(bc.Transactions) + 1
 	bc.Transactions = append(bc.Transactions, tx)
+	SaveTransactions(tx)
 
 }

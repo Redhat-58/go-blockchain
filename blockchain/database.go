@@ -5,6 +5,7 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"go.etcd.io/bbolt"
 )
@@ -22,12 +23,12 @@ func InitDB() {
 
 func SaveBlock(b *Block) error {
 	return DB.Update(func(tx *bbolt.Tx) error {
-		bucket := tx.Bucket([]byte("blocks"))
+		bucket := tx.Bucket([]byte("Blocks"))
 		var err error
 
 		// Create the bucket if it does not exist
 		if bucket == nil {
-			bucket, err = tx.CreateBucket([]byte("blocks"))
+			bucket, err = tx.CreateBucket([]byte("Blocks"))
 			if err != nil {
 				return fmt.Errorf("failed to create bucket: %w", err)
 			}
@@ -108,6 +109,34 @@ func UpdateBalance(b *Block, t *Token) {
 		fmt.Println("Error Saving data", err)
 	}
 
+}
+
+func SaveTransactions(t *Transaction) error {
+	return DB.Update(func(tx *bbolt.Tx) error {
+		bucket := tx.Bucket([]byte("Transactions"))
+		var err error
+
+		// Create the bucket if it does not exist
+		if bucket == nil {
+			bucket, err = tx.CreateBucket([]byte("Transactions"))
+			if err != nil {
+				return fmt.Errorf("failed to create bucket: %w", err)
+			}
+		}
+		serializedTransaction, err := json.Marshal(t)
+		if err != nil {
+			return fmt.Errorf("failed to serialize block: %w", err)
+		}
+
+		serializedTransactionId := []byte(strconv.Itoa(t.ID))
+
+		err = bucket.Put(serializedTransactionId, serializedTransaction)
+		if err != nil {
+			return fmt.Errorf("failed to save Transaction: %w", err)
+		}
+		fmt.Println("Transaction saved...")
+		return nil
+	})
 }
 
 func Serialize(block *Block) ([]byte, error) {
