@@ -7,9 +7,18 @@ import (
 	"time"
 )
 
-func (bc *BlockChain) CreateGenesisBlock() *Block {
-	fmt.Println("Created genesis block")
-	return bc.NewBlock(0, "GenesisBlock", "")
+func CreateGenesisBlock() *Block {
+	block := &Block{
+		Index:        0,
+		Timestamp:    time.Now(),
+		Data:         "Genesis Block",
+		PreviousHash: "000000",
+		Hash:         "",
+		Nonce:        0,
+		Transaction:  []*Transaction{},
+	}
+	block.Hash = block.calculateHash()
+	return block
 }
 
 func (bc *BlockChain) NewBlock(index int, data string, previousHash string) *Block {
@@ -19,10 +28,12 @@ func (bc *BlockChain) NewBlock(index int, data string, previousHash string) *Blo
 		PreviousHash: previousHash,
 		Timestamp:    time.Now(),
 		Nonce:        0,
+		Transaction:  []*Transaction{},
 	}
 
 	fmt.Println("Mining new block...")
 	block.ProofOfWork()
+	bc.Blocks = append(bc.Blocks, block)
 	return block
 }
 

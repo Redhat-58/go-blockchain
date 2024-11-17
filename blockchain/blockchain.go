@@ -4,6 +4,7 @@ import "fmt"
 
 func NewBlockChain() *BlockChain {
 	return &BlockChain{
+		Blocks:  []*Block{CreateGenesisBlock()},
 		Token:   *createGenesisToken(),
 		Wallets: createWallets(),
 	}
@@ -25,7 +26,6 @@ func (bc *BlockChain) GetLastBlock() *Block {
 func (bc *BlockChain) AddBlock(data string) *Block {
 	lastBlock := bc.GetLastBlock()
 	newBlock := bc.NewBlock(lastBlock.Index+1, data, lastBlock.Hash)
-	bc.Blocks = append(bc.Blocks, newBlock)
 	return newBlock
 
 }

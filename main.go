@@ -8,9 +8,10 @@ import (
 func main() {
 
 	bc := blockchain.NewBlockChain()
-	bc.CreateGenesisBlock()
 
-	// myBlock := bc.AddBlock("Block 1: Jalal just enterd a tansaction")
+	bc.AddBlock("Block 1: Jalals Block")
+	bc.AddBlock("Block 2: Johns Block")
+	// myBlock.MintToken(&bc.Token, bc)
 
 	for _, block := range bc.Blocks {
 
@@ -23,7 +24,6 @@ func main() {
 		fmt.Println()
 	}
 	fmt.Println()
-	// myBlock.MintToken(&bc.Token, bc)
 
 	fmt.Println(bc.Token)
 	fmt.Println(bc.Transactions)

@@ -10,7 +10,3 @@ func (bc *BlockChain) NewTransaction(to, from string, value float64) {
 	bc.Transactions = append(bc.Transactions, tx)
 
 }
-
-func (bc *BlockChain) CreatGenesisTransaction() {
-
-}
