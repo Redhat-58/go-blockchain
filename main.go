@@ -3,24 +3,37 @@ package main
 import (
 	"fmt"
 	"go-blockchain/blockchain"
+	"go-blockchain/routes"
+	"log"
+	"net/http"
 )
 
 func main() {
 
 	blockchain.InitDB()
+	fmt.Println("....Database initialized....")
 
 	bc := blockchain.NewBlockChain()
+	fmt.Println("....Blockchain created....")
+	bc.AddBlock("Block 1: Jalals Block")
 
-	myBlock := bc.AddBlock("Block 1: Jalals Block")
+	router := routes.InitRoutes()
+	// Start the server
+	fmt.Println("Starting server on :8080")
+	if err := http.ListenAndServe(":8080", router); err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 
-	johnBlock := bc.AddBlock("Block 2: Johns Block")
-	myBlock.MintToken(&bc.Token, bc)
-	myBlock.MintToken(&bc.Token, bc)
+	// myBlock :=
 
-	bc.Token.Transfer(bc, myBlock.Hash, johnBlock.Hash, 0.5)
+	// johnBlock := bc.AddBlock("Block 2: Johns Block")
+	// myBlock.MintToken(&bc.Token, bc)
+	// myBlock.MintToken(&bc.Token, bc)
 
-	fmt.Println(bc.Token)
-	fmt.Println(bc.Transactions)
-	fmt.Println(bc.Wallets)
+	// bc.Token.Transfer(bc, myBlock.Hash, johnBlock.Hash, 0.5)
+
+	// fmt.Println(bc.Token)
+	// fmt.Println(bc.Transactions)
+	// fmt.Println(bc.Wallets)
 
 }
