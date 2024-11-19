@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go-blockchain/blockchain"
+	"go-blockchain/controllers"
 	"go-blockchain/routes"
 	"log"
 	"net/http"
@@ -13,9 +14,8 @@ func main() {
 	blockchain.InitDB()
 	fmt.Println("....Database initialized....")
 
-	bc := blockchain.NewBlockChain()
+	controllers.CreateBlockchain()
 	fmt.Println("....Blockchain created....")
-	bc.AddBlock("Block 1: Jalals Block")
 
 	router := routes.InitRoutes()
 	// Start the server
