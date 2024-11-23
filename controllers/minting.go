@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -20,15 +21,27 @@ func WebsocketConnection(w http.ResponseWriter, r *http.Request) {
 	}
 	defer conn.Close()
 	for {
-		messageType, p, err := conn.ReadMessage()
+		_, hash, err := conn.ReadMessage()
 		if err != nil {
 			fmt.Println("Error reading message", err)
-		}
-		fmt.Println(p)
-		err = conn.WriteMessage(messageType, p)
-		if err != nil {
-			fmt.Println("Error sending message", err)
 			break
 		}
+		var data struct {
+			Hash string `json:"hash"`
+		}
+		if err := json.Unmarshal(hash, &data); err != nil {
+			fmt.Println("Invalid json format", err)
+		}
+
+		userBlock, err := BC.GetBlockByHash(data.Hash)
+		if err != nil {
+			fmt.Println("Error fetching block", err)
+			conn.WriteMessage(websocket.TextMessage, []byte("Invalid json format"))
+			continue
+		}
+		conn.WriteMessage(websocket.TextMessage, []byte("Mining Token...."))
+		userBlock.MintToken(&BC.Token, BC)
+
+		conn.WriteMessage(websocket.TextMessage, []byte("Token minied"))
 	}
 }

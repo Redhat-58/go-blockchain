@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-const mintTargetBits = 3
+const mintTargetBits = 6
 
 func NewToken(name string, symbol string, totalSupply float64) *Token {
 	balances := make(map[string]float64)
@@ -56,6 +56,7 @@ func (t *Token) Transfer(bc *BlockChain, from string, to string, amount float64)
 }
 
 func (b *Block) MintToken(t *Token, bc *BlockChain) {
+	fmt.Println("Mining Token....")
 	targetBits := strings.Repeat("0", mintTargetBits)
 	for {
 		hash := b.calculateHash()
