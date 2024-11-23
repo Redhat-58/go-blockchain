@@ -11,6 +11,7 @@ func InitRoutes() *http.ServeMux {
 
 	// Define routes and their handlers
 	mux.HandleFunc("/", controllers.HelloHandler)
+	mux.HandleFunc("/createBlock", controllers.CreateBlock)
 
 	return mux
 }
