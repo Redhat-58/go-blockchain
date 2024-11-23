@@ -13,5 +13,7 @@ func InitRoutes() *http.ServeMux {
 	mux.HandleFunc("/", controllers.HelloHandler)
 	mux.HandleFunc("/createBlock", controllers.CreateBlock)
 
+	mux.HandleFunc("/ws", controllers.WebsocketConnection)
+
 	return mux
 }

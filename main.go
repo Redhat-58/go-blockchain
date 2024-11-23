@@ -24,9 +24,6 @@ func main() {
 		log.Fatalf("Error starting server: %v", err)
 	}
 
-	// myBlock :=
-
-	// johnBlock := bc.AddBlock("Block 2: Johns Block")
 	// myBlock.MintToken(&bc.Token, bc)
 	// myBlock.MintToken(&bc.Token, bc)
 
