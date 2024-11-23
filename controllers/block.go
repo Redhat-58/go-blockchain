@@ -24,11 +24,12 @@ func CreateBlock(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Ivalid Json format", http.StatusBadRequest)
 		return
 	}
+	newBlock := BC.AddBlock(data.Data)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	response := map[string]string{
-		"message": "Data received",
-		"data":    data.Data,
+		"message":   "Block created",
+		"blockHash": newBlock.Hash,
 	}
 	json.NewEncoder(w).Encode(response)
 }
