@@ -15,5 +15,7 @@ func InitRoutes() *http.ServeMux {
 
 	mux.HandleFunc("/ws", controllers.WebsocketConnection)
 
+	mux.HandleFunc("/transferToken", controllers.TransferToken)
+
 	return mux
 }

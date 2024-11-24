@@ -24,13 +24,6 @@ func main() {
 		log.Fatalf("Error starting server: %v", err)
 	}
 
-	// myBlock.MintToken(&bc.Token, bc)
-	// myBlock.MintToken(&bc.Token, bc)
-
 	// bc.Token.Transfer(bc, myBlock.Hash, johnBlock.Hash, 0.5)
-
-	// fmt.Println(bc.Token)
-	// fmt.Println(bc.Transactions)
-	// fmt.Println(bc.Wallets)
 
 }
