@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func (b *Block) NewWallet(bc *BlockChain) {
+func (b *Block) NewWallet(bc *BlockChain) *Wallet {
 	privateKey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 	if err != nil {
 		fmt.Println("Error creating private key", err)
@@ -16,8 +16,10 @@ func (b *Block) NewWallet(bc *BlockChain) {
 	if bc.Wallets == nil {
 		bc.Wallets = make(map[string]*Wallet)
 	}
-	bc.Wallets[b.Hash] = &Wallet{privateKey, publicKey, 0}
+	newWallet := &Wallet{privateKey, publicKey, 0}
+	bc.Wallets[b.Hash] = newWallet
 	fmt.Println("created user wallet")
+	return newWallet
 
 }
 
