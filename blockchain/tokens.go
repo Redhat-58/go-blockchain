@@ -28,31 +28,29 @@ func (t *Token) GetBalance(account string) float64 {
 	return 0
 }
 
-func (t *Token) Transfer(bc *BlockChain, from string, to string, amount float64) error {
+func (t *Token) Transfer(bc *BlockChain, from string, to string, amount float64) (string, error) {
 	if amount <= 0 {
-		return errors.New("Amount must be greater than zero: 0")
+		return "", errors.New("Amount must be greater than zero: 0")
 	}
 	if t.Balance[from] < amount {
-		return errors.New("Insufficient balance")
+		return "", errors.New("Insufficient balance")
 	}
 	t.Balance[from] -= amount
 	t.Balance[to] += amount
 
 	fromBlock, err := bc.GetBlockByHash(from)
 	if err != nil {
-		fmt.Println("Error retreving block")
+		return "", errors.New("Error retreving block")
 	}
 	toBlock, err := bc.GetBlockByHash(from)
 	if err != nil {
-		fmt.Println("Error retreving block")
+		return "", errors.New("Error retreving block")
 	}
 
 	UpdateBalance(fromBlock, t)
 	UpdateBalance(toBlock, t)
 
-	fmt.Println("Transferred %.2f %s from %s to %s\n", amount, t.Symbol, from, to)
-
-	return nil
+	return ("Transfer successfull"), nil
 }
 
 func (b *Block) MintToken(t *Token, bc *BlockChain) {

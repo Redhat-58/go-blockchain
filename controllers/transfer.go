@@ -24,11 +24,15 @@ func TransferToken(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Ivalid Json format", http.StatusBadRequest)
 		return
 	}
-	BC.Token.Transfer(BC, data.From, data.To, data.Amount)
+	result, err := BC.Token.Transfer(BC, data.From, data.To, data.Amount)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	response := map[string]interface{}{
-		"message": "Transfer successful",
+		"message": result,
 		"from":    data.From,
 		"to":      data.To,
 		"amount":  data.Amount,
