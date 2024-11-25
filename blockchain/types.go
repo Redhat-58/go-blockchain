@@ -31,6 +31,7 @@ type BlockChain struct {
 	Token        Token
 	Transactions []*Transaction
 	Wallets      map[string]*Wallet
+	BlockIndex   map[string]*Block
 }
 
 type ProofOfWork struct {

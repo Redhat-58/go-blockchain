@@ -45,10 +45,9 @@ func (b *Block) calculateHash() string {
 }
 
 func (bc *BlockChain) GetBlockByHash(hash string) (*Block, error) {
-	for _, block := range bc.Blocks {
-		if block.Hash == hash {
-			return block, nil
-		}
+	block, exists := bc.BlockIndex[hash]
+	if !exists {
+		return nil, fmt.Errorf("no block found")
 	}
-	return nil, fmt.Errorf("block not found for hash: %s", hash)
+	return block, nil
 }
