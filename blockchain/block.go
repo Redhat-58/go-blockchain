@@ -52,3 +52,8 @@ func (bc *BlockChain) GetBlockByHash(hash string) (*Block, error) {
 	}
 	return block, nil
 }
+
+func (bc *BlockChain) GetBlockBalance(hash string) float64 {
+	balance := bc.Token.Balance[hash]
+	return balance
+}
