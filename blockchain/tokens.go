@@ -67,4 +67,6 @@ func (b *Block) MintToken(t *Token, bc *BlockChain) {
 		}
 		b.Nonce++
 	}
+	targetBits = ""
+	return
 }
