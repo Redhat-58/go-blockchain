@@ -9,6 +9,7 @@ A simple blockchain implemented in golang
 3. Transactions
 4. Wallets
 5. Persistent storage
+6. API endpoints 
 
 
 # Contribution Guide
